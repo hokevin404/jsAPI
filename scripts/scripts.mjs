@@ -23,12 +23,13 @@ function pTypePage() {
 
 function createListOptions() {
     const optionLabelEl = document.createElement("label");
-    // const att = document.createAttribute("for");
-    // att.value = "mbti";
     optionLabelEl.setAttribute("for", "mbti");
     optionLabelEl.innerText = "Select your MBTI: ";
-    const optionSelectEl = document.createElement("select");
     dropForm.appendChild(optionLabelEl);
+
+    const optionSelectEl = document.createElement("select");
+    optionSelectEl.setAttribute("name", "mbti");
+    dropForm.appendChild(optionSelectEl);
 
     console.log(dropForm);
 }
