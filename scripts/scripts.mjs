@@ -31,5 +31,12 @@ function createListOptions() {
     optionSelectEl.setAttribute("name", "mbti");
     dropForm.appendChild(optionSelectEl);
 
+    mbtiList.forEach((item) => {
+        const optionEl = document.createElement("option");
+        optionEl.setAttribute("value", item);
+        optionEl.innerText = item;
+        optionSelectEl.appendChild(optionEl);
+    });
+
     console.log(dropForm);
 }
