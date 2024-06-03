@@ -5,11 +5,11 @@ let btn = document.querySelector("button")
 // console.log(btn);
 let dropForm = document.querySelector("form");
 // console.log(dropForm);
-const mbtiList = ["INTJ-A/ INTJ-T", "INTP-A/ INTP-T", "ENTJ-A/ ENTJ-T", "ENTP-A/ ENTP-T", 
-              "INFJ-A/ INFJ-T", "INFP-A/ INFP-T", "ENFJ-A/ ENFJ-T", "ENFP-A/ ENFP-T", 
-              "ISTJ-A/ ISTJ-T", "ISFJ-A/ ISFH-T", "ESTJ-A/ ESTJ-T", "ESFJ-A/ ESFJ-T", 
-              "ISTP-A/ ISTP-T", "ISFP-A/ ISFP-T", "ESTP-A/ ESTP-T", "ESFP-A/ ESFP-T", 
-            ];
+const mbtiList = {"INTJ": "field", "INTP": "field", "ENTJ": "dragon", "ENTP": "humanoid", 
+                  "INFJ": "grass", "INFP": "fairy", "ENFJ": "humanoid", "ENFP": "ditto", 
+                  "ISTJ": "water2", "ISFJ": "mineral", "ESTJ": "water1", "ESFJ": "flying", 
+                  "ISTP": "amorphous", "ISFP": "bug", "ESTP": "water3", "ESFP": "monster", 
+};
 
 btn.addEventListener("click", pTypePage);
 
@@ -33,12 +33,13 @@ function createListOptions() {
     optionSelectEl.setAttribute("name", "mbti");
     dropForm.appendChild(optionSelectEl);
 
-    mbtiList.forEach((item) => {
+    for(let key in mbtiList) {
+        // console.log(key);
         const optionEl = document.createElement("option");
-        optionEl.setAttribute("value", item);
-        optionEl.innerText = item;
+        optionEl.setAttribute("value", key);
+        optionEl.innerText = key;
         optionSelectEl.appendChild(optionEl);
-    });
+    };
 
     console.log(dropForm);
 }
