@@ -19,6 +19,8 @@ function pTypePage() {
     displayBox[0].childNodes[3].textContent = 
         "Please select your personlity from the dropdown menu.";
     createListOptions();
+    submitBtn();
+    btn.style.display = "none";
 }
 
 function createListOptions() {
@@ -39,4 +41,14 @@ function createListOptions() {
     });
 
     console.log(dropForm);
+}
+
+function submitBtn() {
+    submitBtn = document.createElement("input");
+    submitBtn.setAttribute("type", "submit");
+    submitBtn.setAttribute("value", "Submit");
+    console.log(submitBtn);
+    const breakLine = document.createElement("br");
+    dropForm.appendChild(breakLine);
+    dropForm.appendChild(submitBtn);
 }
