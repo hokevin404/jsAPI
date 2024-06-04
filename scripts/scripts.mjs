@@ -1,6 +1,8 @@
 let displayBox = document.getElementsByClassName("main");
+displayBox[0].style.backgroundImage='linear-gradient(to bottom right, yellow, blue)';
+displayBox[0].style.border= '3px solid black';
 // console.log(main);
-// console.log(main[0]);
+// console.log(displayBox[0]);
 let btn = document.querySelector("button")
 // console.log(btn);
 let dropForm = document.querySelector("form");
@@ -25,7 +27,7 @@ function pTypePage() {
     btn.style.display = "none";
 
     submitBtn = document.querySelector("button");
-    console.log(submitBtn);
+    // console.log(submitBtn);
     submitBtn.addEventListener("click", eggDisplay); 
     // const apiData = await pokemonAPI();
     // console.log(apiData);
@@ -78,21 +80,7 @@ async function eggDisplay(e) {
     const eggGroup = mbtiList[mbtiValue];
     // console.log(eggGroup);
     let pokemon = "";
-    // apiData.forEach(async (eggs) => {
-    //     // console.log(eggs.name)
-    //     if(eggs.name == eggGroup)
-    //     {
-    //         // console.log(eggs)
-    //         // console.log(eggs.url);
-    //         const eggGroupAPI = await fetch(eggs.url);
-    //         const pokemonArr = await eggGroupAPI.json();
-    //         // console.log(pokemon.pokemon_species.length);
-    //         const numOfPokemon = pokemonArr.pokemon_species.length;
-    //         const randomNum = getRNG(numOfPokemon);
-    //         pokemon = pokemonArr.pokemon_species[randomNum].name;
-    //         // console.log(pokemon);
-    //     }
-    // });
+
     for(let i = 0; i < apiData.length; i++) {
         if(apiData[i].name == eggGroup) {
             // console.log(apiData[i].url);
@@ -119,7 +107,20 @@ async function eggDisplay(e) {
     pokeIMG.style.height = "300px";
     pokeIMG.style.position = "relative";
     pokeIMG.style.margin = "0 auto";
-    dropForm.appendChild(pokeIMG);
+    pokeIMG.style.marginTop = "10vh"
+    displayBox[0].appendChild(pokeIMG);
+    submitBtn.remove();
+    dropForm.remove();
+    displayBox[0].childNodes[3].textContent = pokemon;
+    displayBox[0].childNodes[3].style.fontFamily = "cursive";
+    displayBox[0].childNodes[3].style.fontSize = "xx-large";
+    displayBox[0].childNodes[3].style.fontWeight = "bold";
+    let h1EL = displayBox[0].childNodes[3].textContent;
+    displayBox[0].style.backgroundImage='';
+    displayBox[0].style.border= '';
+    const h1El = displayBox[0].getElementsByTagName("h1");
+    h1El[0].innerText = '';
+
 }
 
 async function pokemonAPI() {
@@ -135,7 +136,3 @@ async function pokemonAPI() {
 function getRNG(maxNum) {
     return Math.floor(Math.random() * maxNum);
 }
-
-// const pokemon = https://pokeapi.co/api/v2/pokemon/ + ditto
-// pokemon.sprites.front_default
-// imbed to <img>
