@@ -105,7 +105,21 @@ async function eggDisplay(e) {
             // console.log(pokemon);
         }
     }
-    console.log(pokemon);
+    // console.log(pokemon);
+    pokemonURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
+    // console.log(pokemonURL);
+    pokemonData = await fetch(pokemonURL);
+    const pokedex = await pokemonData.json();
+    // console.log(pokedex.sprites.front_default);
+    const pokeImgURL = pokedex.sprites.front_default;
+    let pokeIMG = document.createElement("img");
+    pokeIMG.setAttribute("src", pokeImgURL);
+    pokeIMG.setAttribute("alt", `Image of ${pokemon}`);
+    pokeIMG.style.width = "300px";
+    pokeIMG.style.height = "300px";
+    pokeIMG.style.position = "relative";
+    pokeIMG.style.margin = "0 auto";
+    dropForm.appendChild(pokeIMG);
 }
 
 async function pokemonAPI() {
