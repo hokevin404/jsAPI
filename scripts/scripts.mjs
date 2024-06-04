@@ -77,21 +77,35 @@ async function eggDisplay(e) {
     // console.log(apiData);
     const eggGroup = mbtiList[mbtiValue];
     // console.log(eggGroup);
-    apiData.forEach(async (eggs) => {
-        // console.log(eggs.name)
-        if(eggs.name == eggGroup)
-        {
-            // console.log(eggs)
-            // console.log(eggs.url);
-            const eggGroupAPI = await fetch(eggs.url);
+    let pokemon = "";
+    // apiData.forEach(async (eggs) => {
+    //     // console.log(eggs.name)
+    //     if(eggs.name == eggGroup)
+    //     {
+    //         // console.log(eggs)
+    //         // console.log(eggs.url);
+    //         const eggGroupAPI = await fetch(eggs.url);
+    //         const pokemonArr = await eggGroupAPI.json();
+    //         // console.log(pokemon.pokemon_species.length);
+    //         const numOfPokemon = pokemonArr.pokemon_species.length;
+    //         const randomNum = getRNG(numOfPokemon);
+    //         pokemon = pokemonArr.pokemon_species[randomNum].name;
+    //         // console.log(pokemon);
+    //     }
+    // });
+    for(let i = 0; i < apiData.length; i++) {
+        if(apiData[i].name == eggGroup) {
+            // console.log(apiData[i].url);
+            const eggGroupAPI = await fetch(apiData[i].url);
             const pokemonArr = await eggGroupAPI.json();
             // console.log(pokemon.pokemon_species.length);
             const numOfPokemon = pokemonArr.pokemon_species.length;
             const randomNum = getRNG(numOfPokemon);
-            const pokemon = pokemonArr.pokemon_species[randomNum].name;
+            pokemon = pokemonArr.pokemon_species[randomNum].name;
             // console.log(pokemon);
         }
-    });
+    }
+    console.log(pokemon);
 }
 
 async function pokemonAPI() {
