@@ -1,3 +1,5 @@
+import { getRNG } from "./scripts.mjs";
+
 export {styleMain, stylePokemonImg, styleOutCome};
 
 let displayBox = document.getElementsByClassName("main");
@@ -27,8 +29,22 @@ function stylePokemonImg(pokemon, pokeImgURL) {
     // Create image tag
     let img = document.createElement("img");
 
-    //Set source attribute to pokemon image URL
-    img.setAttribute("src", `https://img.pokemondb.net/sprites/home/normal/${pokemon}.png`);
+    const shinyChance = getRNG(25);
+    // console.log(shinyChance);
+
+    if(shinyChance == 0)
+    {
+        //Set source attribute to pokemon image URL
+        img.setAttribute("src", `https://img.pokemondb.net/sprites/home/shiny/${pokemon}.png`);
+        const aShiny = document.createElement("h2");
+        aShiny.innerText = `OMG! You are a SHINY!`;
+        displayBox[0].appendChild(aShiny);
+    } 
+    else
+    {
+        //Set source attribute to pokemon image URL
+        img.setAttribute("src", `https://img.pokemondb.net/sprites/home/normal/${pokemon}.png`);
+    }
     
     // Set alt attribute to pokemon name
     img.setAttribute("alt", pokemon);

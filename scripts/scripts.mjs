@@ -2,6 +2,8 @@ import {mbtiList} from "./database.mjs";
 import {styleMain, stylePokemonImg, styleOutCome} from "./styleOutcomes.mjs";
 import {createListOptions, createSubmitBtn, createResetBtn} from "./creation.mjs"
 
+export {getRNG};
+
 // Store child elements from div class named "main"
 let displayBox = document.getElementsByClassName("main");
 // console.log(displayBox);
