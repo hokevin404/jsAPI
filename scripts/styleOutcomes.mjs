@@ -25,6 +25,7 @@ function stylePokemonImg(pokemon, pokeImgURL) {
     let anchor = document.createElement("a");
     // Set href attribute to Pokemon URL
     anchor.setAttribute("href", `https://pokemondb.net/pokedex/${pokemon}`)
+    anchor.setAttribute("target", "_blank")
 
     // Create image tag
     let img = document.createElement("img");
