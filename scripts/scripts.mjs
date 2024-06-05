@@ -93,24 +93,8 @@ async function eggDisplay(e) {
             // console.log(pokemon);
         }
     }
-
-    // Concatenate the pokemon name from the pokemon variable to the 
-    // pokemon API link to go to it's specific API
-    const pokemonURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
-    // console.log(pokemonURL);
-
-    // Fetch the API of that specific pokemon 
-    const pokemonData = await fetch(pokemonURL);
-
-    // Assign to pokedex variable all of that Pokemon's data
-    const pokedex = await pokemonData.json();
-
-    // Obtain specific pokemon's sprite image URL and assign to variable pokeIMGUrl
-    // console.log(pokedex.sprites.front_default);
-    const pokeImgURL = pokedex.sprites.front_default;
-
     // Stylize specific pokemon image
-    stylePokemonImg(pokemon, pokeImgURL);
+    stylePokemonImg(pokemon);
 
     // Stylize text of Pokemon name
     styleOutCome(pokemon);

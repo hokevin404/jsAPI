@@ -85,7 +85,9 @@ function createResetBtn() {
     resetBtn.style.position = "relative";
 
     // Move Reset button from the right 
-    resetBtn.style.right = "35%";
+    resetBtn.style.right = "32%";
+
+    resetBtn.style.top = "35px";
 
     // Attach event listener to Reset button
     resetBtn.addEventListener("click", resetWindow);

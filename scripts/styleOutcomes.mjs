@@ -19,15 +19,25 @@ function styleMain() {
 
 // Stylize image of Pokemon accepting pokemon name and Pokemon image URL
 function stylePokemonImg(pokemon, pokeImgURL) {
-    let pokeIMG = document.createElement("img");
-    pokeIMG.setAttribute("src", pokeImgURL);
-    pokeIMG.setAttribute("alt", `Image of ${pokemon}`);
-    pokeIMG.style.width = "300px";
-    pokeIMG.style.height = "300px";
-    pokeIMG.style.position = "relative";
-    pokeIMG.style.margin = "0 auto";
-    pokeIMG.style.marginTop = "10vh"
-    displayBox[0].appendChild(pokeIMG);
+    // Create anchor tag
+    let anchor = document.createElement("a");
+    // Set href attribute to Pokemon URL
+    anchor.setAttribute("href", `https://pokemondb.net/pokedex/${pokemon}`)
+
+    // Create image tag
+    let img = document.createElement("img");
+
+    //Set source attribute to pokemon image URL
+    img.setAttribute("src", `https://img.pokemondb.net/sprites/home/normal/${pokemon}.png`);
+    
+    // Set alt attribute to pokemon name
+    img.setAttribute("alt", pokemon);
+    
+    // Attach Pokemon image to anchor tag
+    anchor.appendChild(img);
+    
+    // Attach anchor tag to div class "main"
+    displayBox[0].appendChild(anchor);
 }
 
 function styleOutCome(pokemonName) {
