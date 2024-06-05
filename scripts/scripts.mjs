@@ -1,91 +1,87 @@
-// import {mbtiList} from "./database.mjs";
-// import stylePokemonImg from "./styleOutcomes.mjs";
-// import styleOutCome from "./styleOutcomes.mjs";
+import {mbtiList} from "./database.mjs";
+import {styleMain, stylePokemonImg, styleOutCome} from "./styleOutcomes.mjs";
+import {createListOptions, createSubmitBtn, createResetBtn} from "./creation.mjs"
 
+// Store child elements from div class named "main"
 let displayBox = document.getElementsByClassName("main");
-displayBox[0].style.backgroundImage='linear-gradient(to bottom right, yellow, blue)';
-displayBox[0].style.border= '3px solid black';
-// console.log(main);
-// console.log(displayBox[0]);
+// console.log(displayBox);
+
+// Get the button element within the HTML document
 let btn = document.querySelector("button")
 // console.log(btn);
-let dropForm = document.querySelector("form");
-// console.log(dropForm);
-let submitBtn;
-let mbtiValue;
-const mbtiList = {"INTJ": "ground", "INTP": "ground", "ENTJ": "dragon", "ENTP": "humanshape", 
-                  "INFJ": "plant", "INFP": "fairy", "ENFJ": "humanshape", "ENFP": "ditto", 
-                  "ISTJ": "water2", "ISFJ": "mineral", "ESTJ": "water1", "ESFJ": "flying", 
-                  "ISTP": "indeterminate", "ISFP": "bug", "ESTP": "water3", "ESFP": "monster", 
-};
 
+styleMain();
+
+// Event listener to the Start button
 btn.addEventListener("click", pTypePage);
 
+// Callback function for the Start button
+// Changes displayed to a dropdown list of MBTIs to select and the Start button to a Submit button
 function pTypePage() {
     // console.log("Event Fired")
-    // console.log(displayBox);
+    // console.log(displayBox[0]);
+
+    // Changes introduction text to text that directs user on what to do on new page
     displayBox[0].childNodes[3].textContent = 
-        "Please select your personlity from the dropdown menu.";
+        "Please select your personlity from the dropdown list.";
+    
+    // Create dropdown list of the MBTI 16 personalities
     createListOptions();
+
+    // Changes the Start buton to Submit button
     createSubmitBtn();
-    btn.style.display = "none";
 
-    submitBtn = document.querySelector("button");
+    // Get the button element within the HTML document
+    let submitBtn = document.querySelector("button");
     // console.log(submitBtn);
+
+    // Add new event listener funtionality to Submit button
     submitBtn.addEventListener("click", eggDisplay); 
-    // const apiData = await pokemonAPI();
-    // console.log(apiData);
 }
 
-function createListOptions() {
-    const optionLabelEl = document.createElement("label");
-    optionLabelEl.setAttribute("for", "mbti");
-    optionLabelEl.innerText = "Select your MBTI: ";
-    dropForm.appendChild(optionLabelEl);
+// Create dropdown list of the MBTI 16 personalities
+createListOptions;
 
-    const optionSelectEl = document.createElement("select");
-    optionSelectEl.setAttribute("name", "mbti");
-    dropForm.appendChild(optionSelectEl);
+// Create Submit button and Replace current Start button
+createSubmitBtn;
 
-    for(let key in mbtiList) {
-        // console.log(key);
-        const optionEl = document.createElement("option");
-        optionEl.setAttribute("value", key);
-        optionEl.innerText = key;
-        optionSelectEl.appendChild(optionEl);
-    };
-
-    // console.log(dropForm);
-}
-
-function createSubmitBtn() {
-    submitBtn = document.createElement("button");
-    submitBtn.setAttribute("type", "submit");
-    // submitBtn.setAttribute("value", "Submit");
-    submitBtn.setAttribute("form", "myForm")
-    submitBtn.innerText = "Submit";
-    // console.log(submitBtn);
-    // const breakLine = document.createElement("br");
-    // dropForm.appendChild(breakLine);
-    const parentClass = dropForm.parentNode;
-    parentClass.appendChild(submitBtn)
-    parentClass.replaceChild(submitBtn, btn);
-}
-
+// Asynchronous function to display Pokemon
 async function eggDisplay(e) {
     // console.log("Egg")
+
+    // Prevent page refresh
     e.preventDefault();
+
+    // Get the form element within the HTML document
+    let dropForm = document.querySelector("form");
+    // console.log(dropForm);
+    
     // console.log(e.target.form.elements.mbti.value);
-    mbtiValue = e.target.form.elements.mbti.value;
+
+    // Get the MBTI value that user selected from dropdown list
+    const mbtiValue = e.target.form.elements.mbti.value;
     // console.log(mbtiValue);
-    // return mbtiValue;
+
+    // Call function to fetch pokemon API
     const apiData = await pokemonAPI();
     // console.log(apiData);
+
+    // Input user selected MBTI into mbtiList object as key to get 
+    // it's corresponding value pair and assign to variable eggGroup
     const eggGroup = mbtiList[mbtiValue];
     // console.log(eggGroup);
+
+    // Memory allocation for variable
     let pokemon = "";
 
+    // for loop to iterate through API data
     for(let i = 0; i < apiData.length; i++) {
+        // If variable eggGroup matches with API's Pokemon egg group:
+        // 1) obtain the url for the egg group
+        // 2) obtain the all pokemon within that egg group
+        // 3) obtain the number of pokemon within that egg group
+        // 4) Randomly select a Pokemon from that egg group
+        // 5) Assign that Pokemon to a variable pokemon
         if(apiData[i].name == eggGroup) {
             // console.log(apiData[i].url);
             const eggGroupAPI = await fetch(apiData[i].url);
@@ -97,67 +93,58 @@ async function eggDisplay(e) {
             // console.log(pokemon);
         }
     }
-    // console.log(pokemon);
-    pokemonURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
+
+    // Concatenate the pokemon name from the pokemon variable to the 
+    // pokemon API link to go to it's specific API
+    const pokemonURL = "https://pokeapi.co/api/v2/pokemon/" + pokemon;
     // console.log(pokemonURL);
-    pokemonData = await fetch(pokemonURL);
+
+    // Fetch the API of that specific pokemon 
+    const pokemonData = await fetch(pokemonURL);
+
+    // Assign to pokedex variable all of that Pokemon's data
     const pokedex = await pokemonData.json();
+
+    // Obtain specific pokemon's sprite image URL and assign to variable pokeIMGUrl
     // console.log(pokedex.sprites.front_default);
     const pokeImgURL = pokedex.sprites.front_default;
+
+    // Stylize specific pokemon image
     stylePokemonImg(pokemon, pokeImgURL);
+
+    // Stylize text of Pokemon name
     styleOutCome(pokemon);
-    // location.reload();
+    
+    // Create Reset button and replace current Submit button
     createResetBtn();
-    resetBtn = document.querySelector("button");
-    resetBtn.addEventListener("click", resetWindow);
-    displayBox[0].appendChild(resetBtn);
+
+    // Remove form tag
+    dropForm.remove();
 }
 
+// Asynchronous function to call Pokemon API
 async function pokemonAPI() {
+    // Fetch Pokemon Egg Groups from Pokemon API
     const apiResult = await fetch("https://pokeapi.co/api/v2/egg-group");
     // console.log(apiResult);
+
+    // Obtain the data from API
     const data = await apiResult.json();
     // console.log(data);
+
+    // Assign Egg Group results to results variable
     const results = await data.results;
+
     // console.log(results)
     return results;
 }
 
+// Random number generator function 
 function getRNG(maxNum) {
     return Math.floor(Math.random() * maxNum);
 }
 
-function stylePokemonImg(pokemon, pokeImgURL) {
-    let pokeIMG = document.createElement("img");
-    pokeIMG.setAttribute("src", pokeImgURL);
-    pokeIMG.setAttribute("alt", `Image of ${pokemon}`);
-    pokeIMG.style.width = "300px";
-    pokeIMG.style.height = "300px";
-    pokeIMG.style.position = "relative";
-    pokeIMG.style.margin = "0 auto";
-    pokeIMG.style.marginTop = "10vh"
-    displayBox[0].appendChild(pokeIMG);
-    // submitBtn.remove();
-    dropForm.remove();
-}
-
-function styleOutCome(pokemonName) {
-    displayBox[0].childNodes[3].textContent = pokemonName;
-    displayBox[0].childNodes[3].style.fontFamily = "cursive";
-    displayBox[0].childNodes[3].style.fontSize = "xx-large";
-    displayBox[0].childNodes[3].style.fontWeight = "bold";
-    displayBox[0].style.backgroundImage='';
-    displayBox[0].style.border= '';
-    displayBox[0].getElementsByTagName("h1")[0].innerHTML = '';
-}
-
-function createResetBtn() {
-    submitBtn.setAttribute("form", "myForm")
-    submitBtn.innerText = "Reset";
-    submitBtn.style.position = "relative";
-    submitBtn.style.right = "35%";
-}
-
-function resetWindow() {
-    location.reload();
-}
+// Function to reload (refresh) current url 
+// function resetWindow() {
+//     window.location.reload();
+// }

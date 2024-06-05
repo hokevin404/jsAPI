@@ -1,6 +1,24 @@
-// export {stylePokemonImg, styleOutCome};
+export {styleMain, stylePokemonImg, styleOutCome};
 
-export function stylePokemonImg(pokemon, pokeImgURL) {
+let displayBox = document.getElementsByClassName("main");
+let submitBtn = document.querySelector("button");
+
+// Stylize div with class "main"
+function styleMain() {
+    // Stylize background image of div class "main" 
+    displayBox[0].style.backgroundImage='linear-gradient(to bottom right, yellow, blue)';
+
+    // Set and stylize the border for div class "main"
+    displayBox[0].style.border= '3px solid black';
+
+    // console.log(displayBox[0]);
+    let btn = document.querySelector("button")
+    // console.log(btn);
+    let dropForm = document.querySelector("form");
+}
+
+// Stylize image of Pokemon accepting pokemon name and Pokemon image URL
+function stylePokemonImg(pokemon, pokeImgURL) {
     let pokeIMG = document.createElement("img");
     pokeIMG.setAttribute("src", pokeImgURL);
     pokeIMG.setAttribute("alt", `Image of ${pokemon}`);
@@ -10,11 +28,9 @@ export function stylePokemonImg(pokemon, pokeImgURL) {
     pokeIMG.style.margin = "0 auto";
     pokeIMG.style.marginTop = "10vh"
     displayBox[0].appendChild(pokeIMG);
-    submitBtn.remove();
-    dropForm.remove();
 }
 
-export function styleOutCome(pokemonName) {
+function styleOutCome(pokemonName) {
     displayBox[0].childNodes[3].textContent = pokemonName;
     displayBox[0].childNodes[3].style.fontFamily = "cursive";
     displayBox[0].childNodes[3].style.fontSize = "xx-large";

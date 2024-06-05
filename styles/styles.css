@@ -5,12 +5,9 @@ body {
 }
 
 .main {
-    /* margin: auto; */
     margin-top: 20vh;
     margin-left: 30vw;
     margin-right: 30vw;
     padding: 5px;
     text-align: center;
-    /* border: 3px solid black; */
-    /* background-image: linear-gradient(to bottom right, yellow, blue); */
 }
